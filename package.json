@@ -7,9 +7,14 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "highcharts": "^6.1.1",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
     "react": "16.3.1",
+    "react-moment": "^0.7.7",
     "react-native": "0.55.4",
+    "react-native-elements": "^0.19.1",
     "react-native-highcharts": "^1.0.2",
     "react-native-svg": "^6.3.1",
     "react-navigation": "^2.2.0",

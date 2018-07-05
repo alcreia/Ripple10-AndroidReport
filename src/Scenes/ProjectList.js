@@ -13,21 +13,12 @@ export default class ProjectList extends  Component{
 
     _userFetch = () => {
 
-        let token = async () => {
-            try {
-                return await AsyncStorage.getItem('userToken');
-            } catch(error) {
-                this.setState({message: error});
-                return null;
-            }
-        };
-
         fetch(
             "http://apiv2.r10.co/api/v1/projects/list?selected_fields=time_add%2Ckey_name%2Ckey_word", {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEyLDEwMTQsMTAxNSwxMDIzLDEwMjQsMTAyNSwxMDI3LDEwNTQsMTA1OSwxMDY1LDEwNjYsMTA2NywxMDY4LDEwNjksMTEwNiwxMTQ1LDExNDYsMTE0NywxMTYyLDExNjUsMTE2NywxMjQxLDEyODQsMTI4NSwxMjg2LDEyOTIsMTM4LDE2MywxNjQsMTY2LDE3MCwxNzQsMTc2LDIxMywyMzUsMjM4LDIzOSwyNDAsMjc1LDMzOCwzMzksNDc4LDQ3OSw1MTMsNTE0LDU4NCw2NDgsNjk4LDcxOCw3MTksNzIwLDcyMSw4MCw4MDgsODA5LDgxLDgxMiw4Miw4MjAsODIxLDgyMiw5ODQsOTk5XX0sImlhdCI6MTUyNzY5NDkwMCwiZXhwIjoxNTMwMjg2OTAwfQ.uugQolBcvyTMR1V8wqE19ivA3_rXnoqk-MK3oYIwof0"}})
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEyLDEwMTQsMTAxNSwxMDIzLDEwMjQsMTAyNSwxMDI3LDEwNTQsMTA1OSwxMDY1LDEwNjYsMTA2NywxMDY4LDEwNjksMTEwNiwxMTQ1LDExNDYsMTE0NywxMTYyLDExNjUsMTE2NywxMjQxLDEyODQsMTI4NSwxMjg2LDEyOTIsMTM4LDE2MywxNjQsMTY2LDE3MCwxNzQsMTc2LDIxMywyMzUsMjM4LDIzOSwyNDAsMjc1LDMzOCwzMzksNDc4LDQ3OSw1MTMsNTE0LDU4NCw2NDgsNjk4LDcxOCw3MTksNzIwLDcyMSw4MCw4MDgsODA5LDgxLDgxMiw4Miw4MjAsODIxLDgyMiw5ODQsOTk5XX0sImlhdCI6MTUzMDUxMDY2MCwiZXhwIjoxNTMzMTAyNjYwfQ.GTNUx0QdRUej7NkkiruCFQhahsSYyKERWhag4nZ04PU"}})
             .then((response) => response.json())
             .then((response) => {
                 this.setState({list: response.data});

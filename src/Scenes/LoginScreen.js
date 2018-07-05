@@ -30,7 +30,7 @@ export default class Login extends Component {
         }
         formBody = formBody.join("&");
 
-        fetch("http://apiv2.r10.co/api/v1/auth/login", {
+        fetch("https://api.ripple10.com/api/v1/auth/login", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
@@ -41,9 +41,8 @@ export default class Login extends Component {
             .then((response) => {
             if (response.statusCode !== 200) this.setState({message: response.message});
                 else {
-                    this.setState({token: response.data.token});
+                    this.setState({token: response.data.token, isLoggingIn: false});
                     this._signInAsync();
-                    this.setState({ isLoggingIn: false })
                 }
             })
             .catch(err => {
@@ -52,9 +51,9 @@ export default class Login extends Component {
             })
     }
 
-    _signInAsync = () => {
+    _signInAsync = async () => {
         AsyncStorage.setItem('userToken',this.state.token);
-        this.props.navigation.navigate('HomeScreen')
+        this.props.navigation.navigate('HomeScreen');
     };
 
     clearPassword = () => {

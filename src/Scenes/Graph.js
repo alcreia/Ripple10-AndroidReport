@@ -1,47 +1,102 @@
-import React, { Component } from 'react';
-import {View, FlatList, Text} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, Picker, Button} from 'react-native';
 import ChartView from 'react-native-highcharts';
+import moment from 'moment';
+import _ from 'lodash';
 
 export default class Graph extends Component {
 
     state = {
-        source:''
+        source: '',
+        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEyLDEwMTQsMTAxNSwxMDIzLDEwMjQsMTAyNSwxMDI3LDEwNTQsMTA1OSwxMDY1LDEwNjYsMTA2NywxMDY4LDEwNjksMTEwNiwxMTQ1LDExNDYsMTE0NywxMTYyLDExNjUsMTE2NywxMjM5LDEyNDEsMTI4NCwxMjg1LDEyODYsMTI5MiwxMzgsMTQyOCwxNDM2LDE0NDQsMTQ2MSwxNTc0LDE2MywxNjQsMTY2LDE3MCwxNzEsMTcyLDE3NCwxNzUsMTc2LDIwOCwyMTMsMjI3LDIzNSwyMzgsMjM5LDI0MCwyNzUsMzE3MiwzMTgzLDMxODQsMzE4NSwzMTkwLDMxOTEsMzM4LDMzOSw0NzgsNDc5LDUxMyw1MTQsNTg0LDY0MSw2NDgsNjg4LDY5OCw2OTksNzE4LDcxOSw3MjAsNzIxLDgwLDgwOCw4MDksODEsODEyLDgyLDgyMCw4MjEsODIyLDkwOSw5MjUsOTg0LDk5OV19LCJpYXQiOjE1MzA1MjYzNDgsImV4cCI6MTUzMzExODM0OH0.oD6wHeR3KtWWIgqWC3gWhaV-8e6TCtVVzy9RITODtJI',
+        startDate: moment(new Date()).subtract(7, 'days').format("YYYY-MM-DD"),
+        endDate: moment(new Date()).format("YYYY-MM-DD"),
+        value: ''
     };
 
     componentDidMount() {
         return fetch(
-            "http://apiv2.r10.co/api/v1/mentions?project=81&since=2017-03-01&until=2017-03-30" +
-            "&service_category=twitter&type=daily&filterbot=false", {
+            `https://api.ripple10.com/api/v1/mentions?project=81&since=${this.state.startDate}&until=${this.state.endDate}` +
+            `&service_category=twitter&type=daily&filterbot=false`, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEyLDEwMTQsMTAxNSwxMDIzLDEwMjQsMTAyNSwxMDI3LDEwNTQsMTA1OSwxMDY1LDEwNjYsMTA2NywxMDY4LDEwNjksMTEwNiwxMTQ1LDExNDYsMTE0NywxMTYyLDExNjUsMTE2NywxMjQxLDEyODQsMTI4NSwxMjg2LDEyOTIsMTM4LDE2MywxNjQsMTY2LDE3MCwxNzQsMTc2LDIxMywyMzUsMjM4LDIzOSwyNDAsMjc1LDMzOCwzMzksNDc4LDQ3OSw1MTMsNTE0LDU4NCw2NDgsNjk4LDcxOCw3MTksNzIwLDcyMSw4MCw4MDgsODA5LDgxLDgxMiw4Miw4MjAsODIxLDgyMiw5ODQsOTk5XX0sImlhdCI6MTUyNzY5NDkwMCwiZXhwIjoxNTMwMjg2OTAwfQ.uugQolBcvyTMR1V8wqE19ivA3_rXnoqk-MK3oYIwof0"}})
+                    "Authorization": this.state.token}})
             .then((response) => response.json())
             .then((response) => {
-                this.setState({source: response.data})
-                /*let series = this.series[0];
-                for (let i = 0; i< this.state.source.length; i++) {
-                    var x = this.state.source.date,
-                        y = this.state.source.count;
-                    series.addPoint([x,y],true,true);
-                }*/
+                this.setState({source: response.data, message:response.message});
+            })
+            .catch((error) => console.error(error))
+    }
+
+    _fetchData = () => {
+        fetch(
+            `https://api.ripple10.com/api/v1/mentions?project=81&since=${this.state.startDate}&until=${this.state.endDate}` +
+            `&service_category=twitter&type=daily&filterbot=false`, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json",
+                    "Authorization": this.state.token}})
+            .then((response) => response.json())
+            .then((response) => {
+                this.setState({source: response.data, message:response.message});
             })
             .catch((error) => console.error(error))
     };
 
+    onValueChange = (value) => {
+        this.setState({value: value});
+
+        if (this.state.value === '1') {
+            this.setState({
+                startDate: moment(new Date()).format("YYYY-MM-DD"),
+                endDate: moment(new Date()).format("YYYY-MM-DD")
+            })
+        } else if (this.state.value === '2') {
+            this.setState({
+                startDate: moment(new Date()).subtract(1, 'days').format("YYYY-MM-DD"),
+                endDate: moment(new Date()).subtract(1, 'days').format("YYYY-MM-DD")
+            })
+        } else if (this.state.value === '3') {
+            this.setState({
+                startDate: moment(new Date()).subtract(7, 'days').format("YYYY-MM-DD"),
+                endDate: moment(new Date()).format("YYYY-MM-DD")
+            })
+        } else if (this.state.value === '4') {
+            this.setState({
+                startDate: moment(new Date()).subtract(30, 'days').format("YYYY-MM-DD"),
+                endDate: moment(new Date()).format("YYYY-MM-DD")
+            })
+        } else if (this.state.value === '5') {
+            this.setState({
+                startDate: moment(new Date()).startOf('month').format("YYYY-MM-DD"),
+                endDate: moment(new Date()).format("YYYY-MM-DD")
+            })
+        } else if (this.state.value === '6') {
+            this.setState({
+                startDate: moment(new Date()).subtract(1, 'month').startOf('month').format("YYYY-MM-DD"),
+                endDate: moment(new Date()).subtract(1, 'month').endOf('month').format("YYYY-MM-DD")
+            })
+        }
+    }
+
     render() {
+
+        let myArray = _.map(this.state.source, 'count');
+        let myDates = _.map(this.state.source, 'date');
 
         var Highcharts = 'Highcharts';
         var conf = {
             chart: {
                 type: 'spline',
-                marginRight: 30,
+                marginRight: 10,
             },
             title: {
                 text: 'Number of Mentions',
             },
             xAxis: {
                 type: 'linear',
+                categories: myDates,
             },
             yAxis: {
                 title: {
@@ -55,29 +110,28 @@ export default class Graph extends Component {
             },
             series: [{
                 name: 'Twitter',
-                data: function () {
-                    var data = [];
-                    var i;
-                    for (i = 0; i < 5; i++) {
-                        data.push({
-                            x: i,
-                            y: i
-                        })
-                    }
-                    return data;
-                },
+                data: myArray,
             }]
         };
 
-        return(
+        return (
             <View>
                 <ChartView style={{height: 300}} config={conf}>
                 </ChartView>
-                <FlatList
-                    data={this.state.source}
-                    renderItem={({item}) => <Text>{item.date}, {item.count}</Text>}
-                    keyExtractor={item => item.date}
-                />
+                <Picker
+                    selectedValue={this.value}
+                    onValueChange={this.onValueChange}>
+                    <Picker.Item label="Today" value='1'/>
+                    <Picker.Item label="Yesterday" value='2'/>
+                    <Picker.Item label="Last 7 Days" value='3'/>
+                    <Picker.Item label="Last 30 Days" value='4'/>
+                    <Picker.Item label="This Month" value='5'/>
+                    <Picker.Item label="Last Month" value='6'/>
+                </Picker>
+                <Button
+                    onPress={this._fetchData()}
+                    title='Refresh'>
+                </Button>
             </View>
 
 
