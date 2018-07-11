@@ -1,37 +1,28 @@
 import React, {Component} from 'react';
-import {ScrollView, StyleSheet, Button, AsyncStorage} from 'react-native';
+import {createBottomTabNavigator} from 'react-navigation'
 import Graph from "./Graph";
+import ProjectList from './ProjectList';
+import HelpScreen from './HelpScreen';
 
-
-export default class HomeScreen extends Component {
-
-    _userLogout = async () => {
-        await AsyncStorage.removeItem('userToken');
-        this.props.navigation.navigate('Login');
-    };
-
-    _showList = () => {
-        this.props.navigation.navigate('List');
-    };
+export default class HomeScreen extends Component{
 
     render() {
+        const Tabs = createBottomTabNavigator({
+            Graph: {screen: Graph},
+            Projects: {screen: ProjectList},
+            Help: {screen: HelpScreen}
+        },{
+            tabBarOptions: {
+                activeTintColor: 'tomato',
+                inactiveTintColor: 'gray',
+            },
+            animationEnabled: false,
+            swipeEnabled: false,
+        })
+
         return(
-            <ScrollView style={styles.container}>
-                <Graph/>
-                <Button
-                    onPress={this._showList}
-                    title="Show list"/>
-                <Button
-                    onPress={this._userLogout}
-                    title="Logout"/>
-            </ScrollView>
+            <Tabs/>
         )
     }
-}
 
-let styles = StyleSheet.create({
-    container: {
-        padding: 20,
-        backgroundColor:'#fff'
-    },
-});
+}

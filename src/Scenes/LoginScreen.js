@@ -53,7 +53,7 @@ export default class Login extends Component {
 
     _signInAsync = async () => {
         AsyncStorage.setItem('userToken',this.state.token);
-        this.props.navigation.navigate('HomeScreen');
+        this.props.navigation.navigate('HelpScreen');
     };
 
     clearPassword = () => {
