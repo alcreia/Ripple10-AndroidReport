@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Text, View, FlatList, Button, AsyncStorage} from 'react-native';
+import {Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {List, ListItem} from 'react-native-elements';
 
 export default class ProjectList extends  Component{
 
@@ -7,7 +8,6 @@ export default class ProjectList extends  Component{
         super(props);
         this.state = {
             list: '',
-            message: '',
         }
     };
 
@@ -28,14 +28,20 @@ export default class ProjectList extends  Component{
     render() {
         return(
             <View>
-                <Text>
-                    {this.state.message}
-                </Text>
-                <FlatList
-                    data={this.state.list}
-                    renderItem={({item}) => <Text>{item.time_add} | {item.key_name} | {item.key_word}</Text>}
-                    keyExtractor={(item, index) => item.key_id.toString()}
-                />
+                <List>
+                    <FlatList
+                        data={this.state.list}
+                        renderItem={({item}) =>
+                            <TouchableOpacity>
+                            <ListItem
+                                title={item.key_name}
+                                subtitle={item.key_word}
+                            />
+                            </TouchableOpacity>
+                        }
+                        keyExtractor={(item, index) => item.key_id.toString()}
+                    />
+                </List>
             </View>
         )
     }

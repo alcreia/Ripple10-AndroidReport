@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Picker, Button, ScrollView} from 'react-native';
+import {Picker, Button, ScrollView, Text} from 'react-native';
 import ChartView from 'react-native-highcharts';
 import moment from 'moment';
 import _ from 'lodash';
@@ -11,28 +11,16 @@ export default class Graph extends Component {
         token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEyLDEwMTQsMTAxNSwxMDIzLDEwMjQsMTAyNSwxMDI3LDEwNTQsMTA1OSwxMDY1LDEwNjYsMTA2NywxMDY4LDEwNjksMTEwNiwxMTQ1LDExNDYsMTE0NywxMTYyLDExNjUsMTE2NywxMjM5LDEyNDEsMTI4NCwxMjg1LDEyODYsMTI5MiwxMzgsMTQyOCwxNDM2LDE0NDQsMTQ2MSwxNTc0LDE2MywxNjQsMTY2LDE3MCwxNzEsMTcyLDE3NCwxNzUsMTc2LDIwOCwyMTMsMjI3LDIzNSwyMzgsMjM5LDI0MCwyNzUsMzE3MiwzMTgzLDMxODQsMzE4NSwzMTkwLDMxOTEsMzM4LDMzOSw0NzgsNDc5LDUxMyw1MTQsNTg0LDY0MSw2NDgsNjg4LDY5OCw2OTksNzE4LDcxOSw3MjAsNzIxLDgwLDgwOCw4MDksODEsODEyLDgyLDgyMCw4MjEsODIyLDkwOSw5MjUsOTg0LDk5OV19LCJpYXQiOjE1MzA1MjYzNDgsImV4cCI6MTUzMzExODM0OH0.oD6wHeR3KtWWIgqWC3gWhaV-8e6TCtVVzy9RITODtJI',
         startDate: moment(new Date()).subtract(7, 'days').format("YYYY-MM-DD"),
         endDate: moment(new Date()).format("YYYY-MM-DD"),
-        value: '3'
+        message: '',
+        value: '3',
+        pid: '81',
     };
 
-    componentDidMount() {
-        return fetch(
-            `https://api.ripple10.com/api/v1/mentions?project=81&since=${this.state.startDate}&until=${this.state.endDate}` +
-            `&service_category=twitter&type=daily&filterbot=false`, {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json",
-                    "Authorization": this.state.token}})
-            .then((response) => response.json())
-            .then((response) => {
-                this.setState({source: response.data, message:response.message});
-            })
-            .catch((error) => console.error(error))
-    }
-
     _fetchData = () => {
+
         fetch(
-            `https://api.ripple10.com/api/v1/mentions?project=81&since=${this.state.startDate}&until=${this.state.endDate}` +
-            `&service_category=twitter&type=daily&filterbot=false`, {
+            `https://api.ripple10.com/api/v1/mentions?project=${this.state.pid}&since=${this.state.startDate}&until=${this.state.endDate}` +
+            `&type=daily&filterbot=false`, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
@@ -82,6 +70,8 @@ export default class Graph extends Component {
 
     render() {
 
+        this._fetchData();
+
         let myArray = _.map(this.state.source, 'count');
         let myDates = _.map(this.state.source, 'date');
 
@@ -118,6 +108,9 @@ export default class Graph extends Component {
             <ScrollView>
                 <ChartView style={{height: 300}} config={conf}>
                 </ChartView>
+                <Text>
+                    {this.state.message}
+                </Text>
                 <Picker
                     selectedValue={(this.value && this.state.value) || '3'}
                     onValueChange={(itemValue) => this.onValueChange(itemValue)}>
