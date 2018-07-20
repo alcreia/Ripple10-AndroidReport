@@ -1,128 +1,114 @@
-import React, { Component } from 'react';
-import {View, Text, TextInput, Image,
-    Button, ScrollView, ActivityIndicator, StyleSheet, AsyncStorage } from 'react-native';
+import React, {Component} from 'react';
+import {
+    View,
+    Text,
+    TextInput,
+    ScrollView,
+    StyleSheet,
+    TouchableOpacity
+} from 'react-native';
+import {onSignIn} from '../Handler/Auth';
+import Icon from '../images/Icon';
 
-export default class Login extends Component {
+export default class LoginScreen extends Component{
 
-    state = {
-        username: '',
-        password: '',
-        isLoggingIn: false,
-        message: '',
-        token:'',
-    };
+    constructor(props) {
+        super(props);
 
-    _userLogin = () => {
-
-        this.setState({ isLoggingIn: true, message: '' });
-
-        let params = {
-            username: this.state.username,
-            password: this.state.password,
-            grant_type: 'password'
+        this.state = {
+            username: '',
+            password: '',
         };
-
-        let formBody = [];
-        for (let property in params) {
-            let encodedKey = encodeURIComponent(property);
-            let encodedValue = encodeURIComponent(params[property]);
-            formBody.push(encodedKey + "=" + encodedValue);
-        }
-        formBody = formBody.join("&");
-
-        fetch("https://api.ripple10.com/api/v1/auth/login", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formBody
-            })
-            .then((response) => response.json())
-            .then((response) => {
-            if (response.statusCode !== 200) this.setState({message: response.message});
-                else {
-                    this.setState({token: response.data.token, isLoggingIn: false});
-                    this._signInAsync();
-                }
-            })
-            .catch(err => {
-                this.setState({ message: err.message });
-                this.setState({ isLoggingIn: false });
-            })
     }
 
-    _signInAsync = async () => {
-        AsyncStorage.setItem('userToken',this.state.token);
-        this.props.navigation.navigate('HelpScreen');
+    _handleSubmit = () => {
+        const navigation = this.props.navigation;
+        onSignIn(this.state.username, this.state.password).then(navigation.navigate("SignedIn"));
     };
-
-    clearPassword = () => {
-        this._password.setNativeProps({ text: '' });
-        this.setState({ isLoggingIn: false, message: '' });
-    }
 
     render() {
         return (
             <ScrollView style={styles.container}>
-                <Image source={require('../images/icon.png')}
-                    style={styles.image} />
-                <Text 
+                <View style={styles.image}>
+                    <Icon/>
+                </View>
+                <View style={{margin: 4}}/>
+                <Text
                     style={styles.title}>
-                    Login
+                    Welcome Back!
                 </Text>
+                <View style={{height: 40}}/>
                 <TextInput
                     placeholder='Username'
-                    placeholderTextColor='#ddd'
+                    placeholderTextColor='#006766'
                     onChangeText={(username) => this.setState({username})}
-                    autoFocus={true}
                     autoCapitalize='none'
+                    underlineColorAndroid='transparent'
                     style={styles.textInput}
                 />
-                <TextInput 
-                    ref={component => this._password = component}
+                <TextInput
                     placeholder='Password'
-                    placeholderTextColor='#ddd'
+                    placeholderTextColor='#006766'
+                    underlineColorAndroid='transparent'
                     onChangeText={(password) => this.setState({password})}
                     secureTextEntry={true}
-                    onFocus={this.clearPassword}
                     autoCapitalize='none'
                     style={styles.textInput}
-                    onSubmitEditing={this._userLogin}
                 />
-                {!!this.state.message && (
+                <View style={{margin: 7}}/>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={this._handleSubmit.bind(this)}>
                     <Text
-                        style={{fontSize: 14, color: 'red', padding: 5}}>
-                        {this.state.message}
+                        style={styles.login}>
+                        Login
                     </Text>
-                )}
-                {this.state.isLoggingIn && <ActivityIndicator />}
-                <View style={{margin:7}} />
-                <Button 
-                    disabled={this.state.isLoggingIn||!this.state.username||!this.state.password}
-                    onPress={this._userLogin}
-                    title="Login"
-                />
-          </ScrollView>
+                </TouchableOpacity>
+                <View style={{margin: 4}}/>
+                <Text
+                    style={styles.contact}>
+                    {`Don't have an account?\nContact Us.`}
+                </Text>
+            </ScrollView>
         )
     }
 }
 
 const styles = StyleSheet.create({
-   container: {
-       padding: 20,
-       backgroundColor: '#2c3e50',
-   },
-   image: {
-       alignSelf:'center',
-       marginBottom:50,
-       marginTop:50,
-   },
+    container: {
+        padding: 25,
+        backgroundColor: '#006766',
+    },
+    image: {
+        alignSelf: 'center',
+        marginTop: 85,
+    },
     title: {
-       fontSize: 27,
-       color:'#ddd'
-   },
+        color: '#ddd',
+        textAlign: 'center'
+    },
     textInput: {
-       color:'#ddd'
-   },
+        color: '#ddd',
+        padding: 10,
+        paddingLeft: 30,
+        borderRadius: 25,
+        backgroundColor: '#00000030',
+        margin: 5,
+    },
+    button: {
+        backgroundColor: '#ddd',
+        borderRadius: 25
+    },
+    login: {
+        textAlign: 'center',
+        color: '#006766',
+        fontSize: 18,
+        padding: 10,
+    },
+    contact: {
+        color: '#ddd',
+        textAlign: 'center',
+        fontSize: 10,
+    },
 
 });

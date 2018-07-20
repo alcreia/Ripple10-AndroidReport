@@ -4,7 +4,7 @@ import ChartView from 'react-native-highcharts';
 import moment from 'moment';
 import _ from 'lodash';
 
-export default class Graph extends Component {
+export default class MentionsGraph extends Component {
 
     state = {
         source: '',
@@ -13,7 +13,7 @@ export default class Graph extends Component {
         endDate: moment(new Date()).format("YYYY-MM-DD"),
         message: '',
         value: '3',
-        pid: '81',
+        pid: this.props.pid,
     };
 
     _fetchData = () => {
@@ -31,6 +31,10 @@ export default class Graph extends Component {
             })
             .catch((error) => console.error(error))
     };
+
+    componentWillUnmount() {
+        this.setState({source:''})
+    }
 
     onValueChange = (value) => {
         this.setState({value: value});

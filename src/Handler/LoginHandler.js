@@ -1,36 +1,69 @@
 import React from 'react';
 import {
-    ActivityIndicator,
-    AsyncStorage,
-    StatusBar,
-    StyleSheet,
-    View,
-} from 'react-native';
+    createStackNavigator,
+    createBottomTabNavigator,
+    createSwitchNavigator
+} from "react-navigation";
+import Entypo from 'react-native-vector-icons/Entypo';
 
-export default class LoginHandler extends React.Component {
+import GraphScreen from '../Scenes/GraphScreen';
+import HelpScreen from '../Scenes/HelpScreen';
+import ProjectScreen from '../Scenes/ProjectScreen';
+import LoginScreen from '../Scenes/LoginScreen';
 
-	constructor(props) {
-		super(props);
-		this._bootstrapAsync();
-	}
+export const SignedIn = createBottomTabNavigator({
+    Project: {
+        screen: ProjectScreen,
+        navigationOptions: {
+            tabBarLabel: "Projects",
+            tabBarIcon: ({focused, tintColor}) => (
+                <Entypo name="list" size={25} color={tintColor}/>
+            )
+        },
+    },
+    Graph: {
+        screen: GraphScreen,
+        navigationOptions: {
+            tabBarLabel: "MentionsGraph",
+            tabBarIcon: ({focused, tintColor}) => (
+                <Entypo name="line-graph" size={25} color={tintColor}/>
+            )
+        },
+    },
+    Help: {
+        screen: HelpScreen,
+        navigationOptions: {
+            tabBarLabel: "Help",
+            tabBarIcon: ({focused, tintColor}) => (
+                <Entypo name="cog" size={25} color={tintColor}/>
+            )
+        },
+    }
+}, {
+    tabBarOptions: {
+        activeTintColor: '#006766',
+        inactiveTintColor: 'gray',
+    }
+});
 
-    _bootstrapAsync = async () => {
-        const userToken = await AsyncStorage.getItem('userToken');
-        this.props.navigation.navigate(userToken ? 'Main' : 'Auth');
-    };
+export const SignedOut = createStackNavigator({
+    Login: {
+        screen: LoginScreen
+    },
+}, {headerMode: 'none'});
 
-	render() {
-        return (
-            <View style={styles.container}>
-                <ActivityIndicator />
-                <StatusBar barStyle="default" />
-            </View>
-            );
-	    }
-}
-
-var styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#2c3e50',
-	},
-})
+export const createRootNavigator = (signedIn = false) => {
+    return createSwitchNavigator(
+        {
+            SignedIn: {
+                screen: SignedIn
+            },
+            SignedOut: {
+                screen: SignedOut
+            }
+        },
+        {
+            initialRouteName: signedIn ? "SignedIn" : "SignedOut"
+        }
+    );
+};

@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
-import {ScrollView, StyleSheet, Button, AsyncStorage} from 'react-native';
+import {ScrollView, StyleSheet, Button} from 'react-native';
+import {onSignOut} from '../Handler/Auth'
 
 export default class HelpScreen extends Component {
 
-    _userLogout = async () => {
-        await AsyncStorage.removeItem('userToken');
-        this.props.navigation.navigate('Login');
+    _handleSubmit = () => {
+        const navigation = this.props.navigation;
+        onSignOut().then(navigation.navigate("SignedOut"))
     };
 
     render() {
         return(
             <ScrollView style={styles.container}>
                 <Button
-                    onPress={this._userLogout}
+                    onPress={this._handleSubmit}
                     title="Logout"/>
             </ScrollView>
         )

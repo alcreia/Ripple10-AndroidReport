@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import Graph from './Graph'
+import MentionsGraph from '../contents/MentionsGraph'
 
-export default class HelpScreen extends Component {
-
+export default class GraphScreen extends Component {
 
     render() {
+
+        const pid = this.props.navigation.getParam('pid','80');
         return(
             <ScrollView style={styles.container}>
-                <Graph/>
+                <MentionsGraph pid={pid}/>
             </ScrollView>
         )
     }

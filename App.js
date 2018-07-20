@@ -1,34 +1,31 @@
 import React, { Component } from 'react';
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
-
-import LoginHandler from "./src/Handler/LoginHandler";
-import Login from "./src/Scenes/LoginScreen";
-import HomeScreen from "./src/Scenes/HomeScreen";
-import {StyleSheet} from "react-native";
-
-const MainStack = createStackNavigator({ Home: HomeScreen},{headerMode: 'none'});
-const AuthStack = createStackNavigator({ Login: Login},{headerMode: 'none'});
-const Navigation = createSwitchNavigator(
-    {
-        Main: MainStack,
-        Auth: AuthStack,
-        User: LoginHandler,
-    },
-    {
-      initialRouteName: 'User'
-    },{headerMode: 'none'});
-
+import {isSignedIn} from "./src/Handler/Auth";
+import {createRootNavigator} from "./src/Handler/LoginHandler";
 export default class App extends Component {
 
-  render() {
-    return (
-      <Navigation style={styles.container}/>
-    )
-  }
-}
+    constructor(props) {
+        super(props);
 
-var styles = StyleSheet.create({
-    container: {
-        color: '#2c3e50',
-    },
-})
+        this.state = {
+            signedIn: false,
+            checkedSignIn: false,
+        }
+    };
+
+    componentDidMount() {
+        isSignedIn()
+            .then(res => this.setState({signedIn: res, checkedSignIn: true}))
+            .catch(err => alert("Error"));
+    }
+
+    render() {
+        const {checkedSignIn, signedIn} = this.state;
+
+        if (!checkedSignIn) {
+            return null;
+        }
+
+        const Layout = createRootNavigator(signedIn);
+        return <Layout/>
+    }
+}
