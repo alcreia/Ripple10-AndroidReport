@@ -30,7 +30,7 @@ class ProjectList extends Component {
 
     _renderItem = ({item}) => {
         return (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('MentionsGraph', {pid: item.key_id})}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('Graph', {pid: item.key_id, name: item.key_name})}>
                 <ListItem
                     title={item.key_name}
                     subtitle={item.key_word}

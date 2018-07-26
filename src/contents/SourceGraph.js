@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {Picker, Button, ScrollView, Text} from 'react-native';
 import ChartView from 'react-native-highcharts';
 import _ from 'lodash';
 
-export default class MentionsGraph extends Component {
+export default class SourceGraph extends Component {
 
     state = {
         source: '',
@@ -13,21 +13,23 @@ export default class MentionsGraph extends Component {
     _fetchData = () => {
 
         fetch(
-            `https://api.ripple10.com/api/v1/mentions?project=${this.props.pid}&since=${this.props.start}&until=${this.props.end}` +
+            `https://api.ripple10.com/api/v1/mentions/composition?project=${this.props.pid}&since=${this.props.startDate}&until=${this.props.endDate}` +
             `&type=daily&filterbot=false`, {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": this.state.token}})
+                    "Authorization": this.state.token
+                }
+            })
             .then((response) => response.json())
             .then((response) => {
-                this.setState({source: response.data, message:response.message});
+                this.setState({source: response.data});
             })
             .catch((error) => alert(error))
     };
 
     componentWillUnmount() {
-        this.setState({source:''})
+        this.setState({source: ''})
     }
 
     render() {
@@ -40,11 +42,11 @@ export default class MentionsGraph extends Component {
         var Highcharts = 'Highcharts';
         var conf = {
             chart: {
-                type: 'spline',
+                type: 'pie',
                 marginRight: 10,
             },
             title: {
-                text: 'Number of Mentions',
+                text: 'Source of Mention',
             },
             xAxis: {
                 type: 'linear',
@@ -67,9 +69,7 @@ export default class MentionsGraph extends Component {
         };
 
         return (
-            <View>
-                <ChartView style={{height: 300}} config={conf}/>
-            </View>
+            <ChartView style={{height: 300}} config={conf}/>
         );
     }
 }

@@ -2,8 +2,7 @@ import {AsyncStorage} from "react-native";
 
 export const USER_TOKEN = "userToken";
 
-export const onSignIn = (user, pass) => {
-
+function _signIn(user, pass) {
     let params = {
         username: user,
         password: pass,
@@ -34,8 +33,9 @@ export const onSignIn = (user, pass) => {
         .catch(err => {
             alert("Wrong username or password")
         });
+}
 
-};
+export const onSignIn = (user, pass) => _signIn(user, pass);
 
 export const onSignOut = () => AsyncStorage.removeItem(USER_TOKEN);
 

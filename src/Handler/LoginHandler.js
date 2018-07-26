@@ -24,7 +24,7 @@ export const SignedIn = createBottomTabNavigator({
     Graph: {
         screen: GraphScreen,
         navigationOptions: {
-            tabBarLabel: "MentionsGraph",
+            tabBarLabel: "Graph",
             tabBarIcon: ({focused, tintColor}) => (
                 <Entypo name="line-graph" size={25} color={tintColor}/>
             )
