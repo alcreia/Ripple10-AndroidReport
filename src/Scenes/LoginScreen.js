@@ -22,8 +22,8 @@ export default class LoginScreen extends Component{
     }
 
     _handleSubmit = () => {
-        const navigation = this.props.navigation;
-        onSignIn(this.state.username, this.state.password).then(navigation.navigate("SignedIn"));
+        let navigation = this.props.navigation;
+        onSignIn(this.state.username, this.state.password).then(navigation.navigate('SignedIn'));
     };
 
     render() {
@@ -41,7 +41,8 @@ export default class LoginScreen extends Component{
                 <TextInput
                     placeholder='Username'
                     placeholderTextColor='#006766'
-                    onChangeText={(username) => this.setState({username})}
+                    value={this.state.username}
+                    onChangeText={(username) => this.setState({username: username})}
                     autoCapitalize='none'
                     underlineColorAndroid='transparent'
                     style={styles.textInput}
@@ -49,8 +50,9 @@ export default class LoginScreen extends Component{
                 <TextInput
                     placeholder='Password'
                     placeholderTextColor='#006766'
+                    value={this.state.password}
                     underlineColorAndroid='transparent'
-                    onChangeText={(password) => this.setState({password})}
+                    onChangeText={(password) => this.setState({password: password})}
                     secureTextEntry={true}
                     autoCapitalize='none'
                     style={styles.textInput}

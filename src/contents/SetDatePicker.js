@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {Picker} from 'react-native';
 import moment from 'moment';
-import
 
 export default class SetDatePicker extends Component {
 
@@ -39,7 +38,6 @@ export default class SetDatePicker extends Component {
 
     render() {
         return (
-            <DateTime
             <Picker
                 selectedValue={this.props.value}
                 onValueChange={(itemValue) => this.onValueChange(itemValue)}>

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import ChartView from 'react-native-highcharts';
-import {View} from "react-native";
+import {View, FlatList, Text} from 'react-native';
 
 export default class SourceGraph extends Component {
 
@@ -8,7 +7,6 @@ export default class SourceGraph extends Component {
         source: '',
         token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEwLDEwMTEsMTAxMiwxMDEzLDEwMTQsMTAyMywxMDI0LDEwMjUsMTAyNywxMDU0LDEwNTksMTA2NSwxMDY2LDEwNjcsMTA2OCwxMDY5LDExMDYsMTE0NSwxMTQ2LDExNDcsMTE2MiwxMTY1LDExNjcsMTIzOSwxMjQxLDEyODQsMTI4NSwxMjg2LDEyOTIsMTM4LDE0MjgsMTQzNiwxNDQ0LDE0NjEsMTU3NCwxNjMsMTY0LDE2NiwxNzAsMTcxLDE3MiwxNzQsMTc1LDE3NiwyMDgsMjEzLDIyNywyMzUsMjM4LDIzOSwyNDAsMjc1LDMxNzIsMzE4MywzMTg0LDMxODUsMzE5MCwzMTkxLDMyMDMsMzIxOCwzMjE5LDMyMjAsMzI0MSwzMzgsMzM5LDQ3OCw0NzksNTEzLDUxNCw1ODQsNjQxLDY0OCw2ODgsNjk4LDY5OSw3MTgsNzE5LDcyMCw3MjEsODA4LDgwOSw4MSw4MTIsODIsODIwLDgyMSw4MjIsOTA5LDkyNSw5ODQsOTk5XX0sImlhdCI6MTUzMzExOTU3NSwiZXhwIjoxNTM1NzExNTc1fQ.XRwz4Wm87gM4l7_CcjKxWKMPCSqPLkvXe0QlYHQX8H4',
     };
-
 
     _fetchData = () => {
 
@@ -18,12 +16,11 @@ export default class SourceGraph extends Component {
                 method: "GET",
                 headers: {
                     "Accept": "application/json",
-                    "Authorization": this.state.token,
+                    "Authorization": this.state.token
                 }
             })
             .then((response) => response.json())
             .then((response) => {
-                console.log(response);
                 this.setState({source: response.data});
             })
             .catch((error) => alert(error))
@@ -33,43 +30,20 @@ export default class SourceGraph extends Component {
         this.setState({source: ''})
     }
 
+
+
     render() {
 
         this._fetchData();
 
-        for (var i = 0; i < this.state.source.length; i++) {
-            delete this.state.source[i]['negative'];
-            delete this.state.source[i]['positive'];
-            delete this.state.source[i]['neutral'];
-            this.state.source[i]['y'] = this.state.source[i]['total'];
-            delete this.state.source[i]['total'];
-        }
-
-        var Highcharts = 'Highcharts';
-        var conf = {
-            chart: {
-                type: 'pie',
-                marginRight: 10,
-            },
-            credits: {
-                enabled: false,
-            },
-            exporting: {
-                enabled: false,
-            },
-            title: {
-                text: 'Source of Mention',
-            },
-            series: [{
-                name: 'Mentions',
-                data: this.state.source,
-            }]
-        };
-
         return (
+
             <View>
-                <ChartView style={{height: 300}} config={conf}/>
+            <FlatList
+                    dataSource={this.state.source}
+                    renderRow={this.renderRow}/>
             </View>
+
         );
     }
 }

@@ -1,14 +1,10 @@
 import {AsyncStorage} from "react-native";
 
-export const USER_TOKEN = "userToken";
-
-function _signIn(user, pass) {
-    let params = {
+export const onSignIn = async (user, pass) => {
+   let params = {
         username: user,
         password: pass,
-        grant_type: 'password'
     };
-
     let formBody = [];
     for (let property in params) {
         let encodedKey = encodeURIComponent(property);
@@ -16,6 +12,8 @@ function _signIn(user, pass) {
         formBody.push(encodedKey + "=" + encodedValue);
     }
     formBody = formBody.join("&");
+
+    let token = '';
 
     fetch("https://api.ripple10.com/api/v1/auth/login", {
         method: "POST",
@@ -26,22 +24,26 @@ function _signIn(user, pass) {
     })
         .then((response) => response.json())
         .then((response) => {
-            if (response.statusCode === 200) {
-                AsyncStorage.setItem(USER_TOKEN, `Bearer ${response.token}`);
-            }
+            token = response.data.token
         })
         .catch(err => {
             alert("Wrong username or password")
         });
-}
 
-export const onSignIn = (user, pass) => _signIn(user, pass);
+    token = 'Bearer ' + token;
+    try {
+        await AsyncStorage.setItem('userToken', token)
+    } catch (e) {
+        console.log(e)
+    }
 
-export const onSignOut = () => AsyncStorage.removeItem(USER_TOKEN);
+};
+
+export const onSignOut = () => AsyncStorage.removeItem('userToken');
 
 export const isSignedIn = () => {
     return new Promise((resolve, reject) => {
-        AsyncStorage.getItem(USER_TOKEN)
+        AsyncStorage.getItem('userToken')
             .then(res => {
                 if (res !== null) {
                     resolve(true)

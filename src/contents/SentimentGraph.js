@@ -8,7 +8,7 @@ export default class SentimentGraph extends Component {
     state = {
         sourcePos: '',
         sourceNeg: '',
-        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEyLDEwMTQsMTAxNSwxMDIzLDEwMjQsMTAyNSwxMDI3LDEwNTQsMTA1OSwxMDY1LDEwNjYsMTA2NywxMDY4LDEwNjksMTEwNiwxMTQ1LDExNDYsMTE0NywxMTYyLDExNjUsMTE2NywxMjM5LDEyNDEsMTI4NCwxMjg1LDEyODYsMTI5MiwxMzgsMTQyOCwxNDM2LDE0NDQsMTQ2MSwxNTc0LDE2MywxNjQsMTY2LDE3MCwxNzEsMTcyLDE3NCwxNzUsMTc2LDIwOCwyMTMsMjI3LDIzNSwyMzgsMjM5LDI0MCwyNzUsMzE3MiwzMTgzLDMxODQsMzE4NSwzMTkwLDMxOTEsMzM4LDMzOSw0NzgsNDc5LDUxMyw1MTQsNTg0LDY0MSw2NDgsNjg4LDY5OCw2OTksNzE4LDcxOSw3MjAsNzIxLDgwLDgwOCw4MDksODEsODEyLDgyLDgyMCw4MjEsODIyLDkwOSw5MjUsOTg0LDk5OV19LCJpYXQiOjE1MzA1MjYzNDgsImV4cCI6MTUzMzExODM0OH0.oD6wHeR3KtWWIgqWC3gWhaV-8e6TCtVVzy9RITODtJI',
+        token: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVpZCI6NTIsImRhdGEiOlsxMDEwLDEwMTEsMTAxMiwxMDEzLDEwMTQsMTAyMywxMDI0LDEwMjUsMTAyNywxMDU0LDEwNTksMTA2NSwxMDY2LDEwNjcsMTA2OCwxMDY5LDExMDYsMTE0NSwxMTQ2LDExNDcsMTE2MiwxMTY1LDExNjcsMTIzOSwxMjQxLDEyODQsMTI4NSwxMjg2LDEyOTIsMTM4LDE0MjgsMTQzNiwxNDQ0LDE0NjEsMTU3NCwxNjMsMTY0LDE2NiwxNzAsMTcxLDE3MiwxNzQsMTc1LDE3NiwyMDgsMjEzLDIyNywyMzUsMjM4LDIzOSwyNDAsMjc1LDMxNzIsMzE4MywzMTg0LDMxODUsMzE5MCwzMTkxLDMyMDMsMzIxOCwzMjE5LDMyMjAsMzI0MSwzMzgsMzM5LDQ3OCw0NzksNTEzLDUxNCw1ODQsNjQxLDY0OCw2ODgsNjk4LDY5OSw3MTgsNzE5LDcyMCw3MjEsODA4LDgwOSw4MSw4MTIsODIsODIwLDgyMSw4MjIsOTA5LDkyNSw5ODQsOTk5XX0sImlhdCI6MTUzMzExOTU3NSwiZXhwIjoxNTM1NzExNTc1fQ.XRwz4Wm87gM4l7_CcjKxWKMPCSqPLkvXe0QlYHQX8H4',
     };
 
     _fetchPositive = () => {
@@ -22,7 +22,7 @@ export default class SentimentGraph extends Component {
                     "Authorization": this.state.token}})
             .then((response) => response.json())
             .then((response) => {
-                this.setState({sourcePos: response.data, message:response.message});
+                this.setState({sourcePos: response.data});
             })
             .catch((error) => alert(error))
     };
@@ -38,19 +38,19 @@ export default class SentimentGraph extends Component {
                     "Authorization": this.state.token}})
             .then((response) => response.json())
             .then((response) => {
-                this.setState({sourceNeg: response.data, message:response.message});
+                this.setState({sourceNeg: response.data});
             })
             .catch((error) => alert(error))
     };
 
     componentWillUnmount() {
-        this.setState({source:''})
+        this.setState({sourcePos:'', sourceNeg:''})
     }
 
     render() {
 
         this._fetchPositive();
-        this._fetchNegative()
+        this._fetchNegative();
 
         let myPosArray = _.map(this.state.sourcePos, 'count');
         let myNegArray = _.map(this.state.sourceNeg, 'count');
@@ -71,6 +71,12 @@ export default class SentimentGraph extends Component {
             xAxis: {
                 type: 'linear',
                 categories: myDates,
+            },
+            credits: {
+                enabled: false,
+            },
+            exporting: {
+                enabled: false,
             },
             yAxis: {
                 title: {

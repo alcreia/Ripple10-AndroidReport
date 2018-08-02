@@ -33,9 +33,9 @@ export const SignedIn = createBottomTabNavigator({
     Help: {
         screen: HelpScreen,
         navigationOptions: {
-            tabBarLabel: "Help",
+            tabBarLabel: "Logout",
             tabBarIcon: ({focused, tintColor}) => (
-                <Entypo name="cog" size={25} color={tintColor}/>
+                <Entypo name="log-out" size={25} color={tintColor}/>
             )
         },
     }
