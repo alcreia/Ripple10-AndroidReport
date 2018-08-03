@@ -5,7 +5,8 @@ import {
     TextInput,
     ScrollView,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    ActivityIndicator
 } from 'react-native';
 import {onSignIn} from '../Handler/Auth';
 import Icon from '../images/Icon';
@@ -18,12 +19,16 @@ export default class LoginScreen extends Component{
         this.state = {
             username: '',
             password: '',
+            isLoading: false,
         };
     }
 
     _handleSubmit = () => {
+        this.setState({isLoading: true});
         let navigation = this.props.navigation;
-        onSignIn(this.state.username, this.state.password).then(navigation.navigate('SignedIn'));
+        onSignIn(this.state.username, this.state.password)
+            .then(this.setState({isLoading: false}))
+            .then(navigation.navigate('SignedIn'));
     };
 
     render() {
@@ -71,6 +76,8 @@ export default class LoginScreen extends Component{
                     style={styles.contact}>
                     {`Don't have an account?\nContact Us.`}
                 </Text>
+                {this.state.isLoading &&
+                <ActivityIndicator/>}
             </ScrollView>
         )
     }
