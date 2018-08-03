@@ -42,7 +42,7 @@ export const SignedIn = createBottomTabNavigator({
 }, {
     tabBarOptions: {
         activeTintColor: '#006766',
-        inactiveTintColor: 'gray',
+        inactiveTintColor: '#a0a0a0',
     }
 });
 

@@ -224,7 +224,7 @@ export default class MentionsGraph extends Component {
 
         return (
             <View>
-                <ChartView style={{height: 300}} config={conf}/>
+                <ChartView style={{height: 300, borderWidth: 2, borderColor: '#006766'}} config={conf}/>
             </View>
         );
     }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AsyncStorage, ScrollView, StyleSheet, Text} from 'react-native';
+import {View, ScrollView, StyleSheet, Text} from 'react-native';
 import MentionsGraph from '../contents/MentionsGraph'
 import SetDatePicker from "../contents/SetDatePicker";
 import moment from "moment";
@@ -25,21 +25,22 @@ export default class GraphScreen extends Component {
 
     render() {
 
-        console.log(this.state.token);
-
         const pid = this.props.navigation.getParam('pid', '80');
         const name = this.props.navigation.getParam('name', null);
         const {startDate, endDate} = this.state;
         return (
-            <ScrollView style={styles.container}>
-                <Text>
-                    Buzz Monitoring {name}
-                </Text>
-                <SetDatePicker callbackFromParent={this.dateCallback} value={this.state.value}/>
-                <MentionsGraph pid={pid} start={startDate} end={endDate}/>
-                <SourceGraph pid={pid} start={startDate} end={endDate}/>
-                <SourceTable pid={pid} start={startDate} end={endDate}/>
-                <SentimentGraph pid={pid} start={startDate} end={endDate}/>
+            <ScrollView>
+                <View style={styles.header}>
+                    <Text style={styles.headerText}>
+                        Buzz Monitoring {name}
+                    </Text>
+                </View>
+                <View style={styles.container}>
+                    <SetDatePicker callbackFromParent={this.dateCallback} value={this.state.value}/>
+                    <MentionsGraph pid={pid} start={startDate} end={endDate}/>
+                    <SourceGraph pid={pid} start={startDate} end={endDate}/>
+                    <SentimentGraph pid={pid} start={startDate} end={endDate}/>
+                </View>
             </ScrollView>
         )
     }
@@ -48,5 +49,13 @@ export default class GraphScreen extends Component {
 let styles = StyleSheet.create({
     container: {
         padding: 20,
+    },
+    header: {
+        backgroundColor: '#006766',
+    },
+    headerText: {
+        fontSize: 15,
+        padding: 10,
+        color: '#ffffff'
     },
 });

@@ -34,7 +34,7 @@ MERGED from [org.webkit:android-jsc:r174650] C:\Users\usr\Desktop\Ivonesia KP\Ri
 	android:allowBackup
 		ADDED from C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\src\main\AndroidManifest.xml:11:7-34
 	android:icon
-		ADDED from C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\src\main\AndroidManifest.xml:10:7-34
+		ADDED from C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\src\main\AndroidManifest.xml:10:7-37
 	android:theme
 		ADDED from C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\src\main\AndroidManifest.xml:12:7-38
 	android:name

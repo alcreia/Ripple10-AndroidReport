@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ChartView from 'react-native-highcharts';
-import {View} from "react-native";
+import {View, AsyncStorage} from "react-native";
 
 export default class SourceGraph extends Component {
 
@@ -32,6 +32,18 @@ export default class SourceGraph extends Component {
     componentWillUnmount() {
         this.setState({source: ''})
     }
+
+/*    async _fetchToken() {
+        try {
+            await AsyncStorage.getItem('userToken')
+                .then((value) => {
+                    console.log(value)
+                })
+        } catch (e) {
+            console.log(e)
+        }
+    }
+*/
 
     render() {
 
@@ -68,7 +80,7 @@ export default class SourceGraph extends Component {
 
         return (
             <View>
-                <ChartView style={{height: 300}} config={conf}/>
+                <ChartView style={{height: 300, borderWidth: 2, borderColor: '#006766'}} config={conf}/>
             </View>
         );
     }

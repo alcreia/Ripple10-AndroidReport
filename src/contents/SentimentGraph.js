@@ -99,7 +99,7 @@ export default class SentimentGraph extends Component {
 
         return (
             <View>
-                <ChartView style={{height: 300}} config={conf} options={opt}/>
+                <ChartView style={{height: 300, borderWidth: 2, borderColor: '#006766'}} config={conf} options={opt}/>
             </View>
         );
     }

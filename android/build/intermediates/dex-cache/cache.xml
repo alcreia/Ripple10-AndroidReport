@@ -30,24 +30,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\RippleReport\react-native-vector-icons\unspecified\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="279750fed3c920d06351dbf32889c1b48203c7ad">
-        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\RippleReport-react-native-vector-icons-unspecified_c0d57b512e327e1e89f9d42b8848bcb2b3ab568e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\usr\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\okio-1.13.0_f81a21f5d77a3a722c6223a1ec9ea53784331f5a.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -93,6 +75,60 @@
     </item>
     <item
         is-multidex="false"
+        jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-1.3.0_6a6607ec8b03c6d491a55984b253bf319e274b7a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\usr\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.6.0\69edde9fc4b01c9fd51d25b83428837478c27254\okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\okhttp-3.6.0_64c978563010b1e8573aff674f6ca4ca3a1e929f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-okhttp3\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-okhttp3-1.3.0_f65c96e87bc20e856d1620a1c4dfdceba7595e71.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\usr\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.6.0\3f9b16b774f2c36cfd86dd2053d0b3059531dacc\okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\okhttp-urlconnection-3.6.0_81ae39a80610e7f4a9a9dc5072991d511743e9f8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\RippleReport\react-native-vector-icons\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="279750fed3c920d06351dbf32889c1b48203c7ad">
+        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\RippleReport-react-native-vector-icons-unspecified_c0d57b512e327e1e89f9d42b8848bcb2b3ab568e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\usr\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\okio-1.13.0_f81a21f5d77a3a722c6223a1ec9ea53784331f5a.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\com.facebook.fbui.textlayoutbuilder\textlayoutbuilder\1.0.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -126,24 +162,6 @@
         revision="23.0.1"
         sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
         <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-23.0.1_2e6d301c069e088c39da52ceff1b51d2caf58992.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.3.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
-        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-1.3.0_6a6607ec8b03c6d491a55984b253bf319e274b7a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\usr\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.6.0\69edde9fc4b01c9fd51d25b83428837478c27254\okhttp-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
-        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\okhttp-3.6.0_64c978563010b1e8573aff674f6ca4ca3a1e929f.jar" />
     </item>
     <item
         is-multidex="false"
@@ -183,30 +201,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-okhttp3\1.3.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
-        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-okhttp3-1.3.0_f65c96e87bc20e856d1620a1c4dfdceba7595e71.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
         <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\internal_impl-23.0.1_9d921659b0ff40629d765752e3b744f4da37f446.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\usr\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.6.0\3f9b16b774f2c36cfd86dd2053d0b3059531dacc\okhttp-urlconnection-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
-        <dex dex="C:\Users\usr\Desktop\Ivonesia KP\RippleReport\android\app\build\intermediates\pre-dexed\debug\okhttp-urlconnection-3.6.0_81ae39a80610e7f4a9a9dc5072991d511743e9f8.jar" />
     </item>
 
 </items>

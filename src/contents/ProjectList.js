@@ -34,6 +34,9 @@ class ProjectList extends Component {
                 <ListItem
                     title={item.key_name}
                     subtitle={item.key_word}
+                    titleStyle={{color:'#006766'}}
+                    subtitleStyle={{fontWeight: 'normal'}}
+                    chevronColor='#006766'
                 />
             </TouchableOpacity>
         )

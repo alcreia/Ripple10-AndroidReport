@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\usr\\Desktop\\Ivonesia KP\\RippleReport\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\applogo.png",
+        "source": "C:\\Users\\usr\\Desktop\\Ivonesia KP\\RippleReport\\android\\app\\src\\main\\res\\mipmap-mdpi\\applogo.png"
+    },
+    {
         "merged": "C:\\Users\\usr\\Desktop\\Ivonesia KP\\RippleReport\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi\\doge.png",
         "source": "C:\\Users\\usr\\Desktop\\Ivonesia KP\\RippleReport\\android\\app\\src\\main\\res\\mipmap-mdpi\\doge.png"
     },
